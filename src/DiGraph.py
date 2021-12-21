@@ -1,12 +1,12 @@
 from GraphInterface import GraphInterface
 from Node import Node
 
+
 class DiGraph(GraphInterface):
     def __init__(self):
         self.nodes = {}
         self.edges = {}
         self.mc = 0
-
 
     def v_size(self) -> int:
         return len(self.nodes)
@@ -28,10 +28,10 @@ class DiGraph(GraphInterface):
 
     def add_edge(self, id1: int, id2: int, weight: float) -> bool:
         if id1 in self.nodes and id2 in self.nodes:
-            self.edges[(id1,id2)] = weight
+            self.edges[(id1, id2)] = weight
             self.nodes[id1].fromMe[id2] = weight
             self.nodes[id2].toMe[id1] = weight
-            self.mc+=1
+            self.mc += 1
         else:
             return False
 
@@ -39,37 +39,38 @@ class DiGraph(GraphInterface):
         if node_id in self.nodes:
             return False
 
-        self.nodes[node_id] = Node(node_id,pos)
-        self.mc+=1
+        self.nodes[node_id] = Node(node_id, pos)
+        self.mc += 1
         return True
 
     def remove_node(self, node_id: int) -> bool:
         if node_id in self.nodes:
 
             for d in self.nodes[node_id].fromMe:
-                self.edges.pop(node_id,d)
+                self.edges.pop(node_id, d)
                 self.nodes[d].toMe.pop(node_id)
 
             for s in self.nodes[node_id].toMe:
-                self.edges.pop(s,node_id)
+                self.edges.pop(s, node_id)
                 self.nodes[s].fromMe.pop(node_id)
 
             self.nodes.pop(node_id)
-            self.mc+=1
+            self.mc += 1
             return True
-        else:
-            return False
 
+        return False
 
+    def remove_edge(self, node_id1: int, node_id2: int) -> bool:
+        if node_id1 in self.nodes and node_id2 in self.nodes:
+            self.edges.pop(node_id1,node_id2)
+            self.nodes[node_id1].fromMe.pop(node_id2)
+            self.nodes[node_id2].toMe.pop(node_id1)
+            self.mc += 1
+            return True
+        return False
 
-
-
-
-
-
-
-
-
+    def __repr__(self) -> str:
+        return super().__repr__()
 
 
 
