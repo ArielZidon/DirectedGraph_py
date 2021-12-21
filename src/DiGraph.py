@@ -1,7 +1,7 @@
 from GraphInterface import GraphInterface
 from Node import Node
 
-class DiGraph():
+class DiGraph(GraphInterface):
     def __init__(self):
         self.nodes = {}
         self.edges = {}
@@ -29,7 +29,7 @@ class DiGraph():
     def add_edge(self, id1: int, id2: int, weight: float) -> bool:
         if id1 in self.nodes and id2 in self.nodes:
             self.edges[(id1,id2)] = weight
-            self.nodes[id1].fromMy[id2] = weight
+            self.nodes[id1].fromMe[id2] = weight
             self.nodes[id2].toMe[id1] = weight
             self.mc+=1
         else:
@@ -45,14 +45,20 @@ class DiGraph():
 
     def remove_node(self, node_id: int) -> bool:
         if node_id in self.nodes:
-            for d in self.nodes[node_id].fromMy:
+
+            for d in self.nodes[node_id].fromMe:
                 self.edges.pop(node_id,d)
-            for s in self.nodes[node_id].toMy:
+                self.nodes[d].toMe.pop(node_id)
+
+            for s in self.nodes[node_id].toMe:
                 self.edges.pop(s,node_id)
+                self.nodes[s].fromMe.pop(node_id)
 
             self.nodes.pop(node_id)
             self.mc+=1
             return True
+        else:
+            return False
 
 
 
