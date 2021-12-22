@@ -11,6 +11,16 @@ class GraphAlgo(GraphAlgoInterface):
 
     def __init__(self,graph=DiGraph()) -> None:
         self.graph = graph
+        self.dijkstra = dijkstra
+
+    def dijkstraAlgo(self, src: int) -> bool:
+        if src == self.dijkstra.src and self.graph.mc == self.dijkstra.MC:
+            return False
+        else:
+            self.dijkstra.src = src
+            self.dijkstra.MC = self.graph.mc
+            self.dijkstra.goForIt()
+            return True
 
     def get_graph(self) -> GraphInterface:
         return self.graph
@@ -60,7 +70,9 @@ class GraphAlgo(GraphAlgoInterface):
         return True
 
     def shortest_path(self, id1: int, id2: int) -> (float, list):
-        pass
+        self.dijkstra(id1,id2)
+        self.dijkstra.addPath(id2)
+        return self.dijkstra.r
 
     def TSP(self, node_lst: List[int]) -> (List[int], float):
         super().TSP(node_lst)
@@ -73,3 +85,74 @@ class GraphAlgo(GraphAlgoInterface):
 
     def __repr__(self) -> str:
         return f'{self.graph}'
+
+
+class dijkstra:
+    def __init__(self,src:int,graph:GraphInterface):
+        self.src = src
+        self.graph = graph
+        self.mc = 0
+
+    #hashmaps
+        self.roads = {}
+        self.paps = {}
+        self.D = {}
+
+    def initshate(self,fathers: dict, listPerNode: list) -> None:
+        for node in self.graph.nodes.keys():
+            if node != self.src:
+                self.D[node] = float('inf')
+                fathers[node] = float('inf')
+                listPerNode.append(node)
+                self.roads[node] = []
+        fathers[self.src] = self.src
+        self.D[self.src] = 0.0
+        self.roads[self.src] = []
+        listPerNode.append(self.src)
+
+    def theSmallest(self, Q: list) -> int:
+        min2 = float('inf')
+        ans = float('-inf')
+        for node in Q:
+            if min2 > self.D[node]:
+                ans = node
+                min2 = self.D[node]
+        if ans != float('-inf'):
+            Q.remove(ans)
+        return ans
+
+    def updating(self, src: int, dest: int) -> None:
+        newDist = self.D[src] + self.graph.edges[(src, dest)]
+        if newDist < self.D[dest]:
+            self.D[dest] = newDist
+            self.paps[dest] = src
+
+    def goForIt(self):
+        Q = []
+        self.initshate(self.paps, Q)
+        while len(Q) != 0:
+            u = self.theSmallest(Q)
+            if u == float('-inf'):
+                return
+            for dest in self.graph.all_out_edges_of_node(u).keys():
+                self.updating(u, dest)
+
+    def addPath(self, dest: int) -> None:
+        if len(self.roads[dest]) != 0:
+            return
+        self.roads[dest] = []
+        if dest == self.src:
+            self.roads[dest].append(dest)
+            return
+        dad = self.paps[dest]
+        if dad == float('inf'):
+            return
+        if dad in self.roads:
+            self.addPath(dad)
+        self.roads[dest].extend(self.roads[dad])
+        self.roads[dest].append(dest)
+
+
+
+
+
