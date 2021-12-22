@@ -62,6 +62,7 @@ def check1():
     print(g_algo.centerPoint())
     g_algo.save_to_json(file + '_saved')
     g_algo.plot_graph()
+    x =9
 
 
 def check2():
