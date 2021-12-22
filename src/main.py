@@ -1,4 +1,4 @@
-from DiGraph import DiGraph, draw_plot
+from DiGraph import DiGraph
 from GraphAlgo import GraphAlgo
 
 
@@ -46,9 +46,9 @@ def check0():
     # print(g_algo.shortest_path(0, 3))
     # g_algo.plot_graph()
     # g_algo.save_to_json("ariel.json")
-    g_algo.load_from_json('../data/A0.json')
-    print(g_algo)
-    draw_plot(g_algo)
+    g_algo.load_from_json('../data/A4.json')
+    # print(g_algo)
+    g_algo.draw_plot()
 
 
 def check1():

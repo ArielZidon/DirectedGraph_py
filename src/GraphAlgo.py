@@ -3,6 +3,8 @@ from Node import Node
 from GraphAlgoInterface import GraphAlgoInterface
 from DiGraph import DiGraph
 from src import GraphInterface
+import matplotlib.pyplot as plt
+import numpy as np
 import json
 
 class GraphAlgo(GraphAlgoInterface):
@@ -21,7 +23,8 @@ class GraphAlgo(GraphAlgoInterface):
 
             for n in dict["Nodes"]:
                 if "pos" in n:
-                    graph_res.add_node(n["id"], pos=(n["pos"][0], n["pos"][1], n["pos"][2]))
+                    data = n["pos"].split(',')
+                    graph_res.add_node(n["id"],(data[0],data[1],data[2]))
                 else:
                     graph_res.add_node(n["id"])
 
@@ -70,3 +73,16 @@ class GraphAlgo(GraphAlgoInterface):
 
     def __repr__(self) -> str:
         return f'{self.graph}'
+
+    def draw_plot(self):
+        for node in self.graph.nodes.values():
+            x = float(node.pos[0])
+            y = float(node.pos[1])
+            id = int(node.key)
+            plt.plot(x, y, markersize=10, marker="o", color="pink")
+            for edge in self.graph.all_out_edges_of_node(id):
+                his_x = float(self.graph.nodes[edge].pos[0])
+                his_y = float(self.graph.nodes[edge].pos[1])
+                plt.annotate("", xy=(x, y), xytext=(his_x, his_y), arrowprops=dict(arrowstyle="<-"))
+        plt.show()
+
