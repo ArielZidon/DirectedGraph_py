@@ -1,5 +1,7 @@
 from GraphInterface import GraphInterface
 from Node import Node
+import matplotlib.pyplot as plt
+import numpy as np
 
 class DiGraph(GraphInterface):
     def __init__(self):
@@ -70,5 +72,34 @@ class DiGraph(GraphInterface):
     def __repr__(self) -> str:
         return f'{self.nodes} ' f'{self.edges}'
 
+
+def draw_plot(g: DiGraph):
+    # Xs = [float(p[0] for p in g)]
+    # Ys = [float(p[1] for p in g)]
+    #
+    # for src in range(len(g) - 1):
+    #     dx = Xs[src + 1] - Xs[src]
+    #     dy = Ys[src + 1] - Ys[src]
+    #     plt.arrow(Xs[src], Ys[src], dx, dy, width=1, length_includes_head=True)
+    #     plt.text(Xs[src], Ys[src], str(src.key))
+    # plt.plot(Xs, Ys, '^-')
+    # plt.show()
+
+    for src in g.nodes.values():
+        x, y = float(src.pos[0]),float(src.pos[1])
+        plt.plot(x, y, markersize=10, marker="o", color="black")
+        plt.text(x, y, str(src.key), color="blue", fontsize=12)
+    plt.show()
+    # for v in g.nodes.values():
+    #     x, y = v.pos['x'], v.pos['y']
+    #     print(x, y)
+    #     plt.plot(x, y, markersize=4, marker='o', color='blue')
+    #     plt.text(x, y, str(v.id), color="red", fontsize=12)
+    #     for nai, w in g.edges[v.id].items():
+    #         u = g.nodes[nai]
+    #         x_, y_ = u.pos['x'], u.pos['y']
+    #         plt.annotate("", xy=(x, y), xytext=(x_, y_), arrowprops=dict(arrowstyle="<-"))
+    #
+    # plt.show()
 
 
