@@ -29,15 +29,15 @@ def check0():
     :return:
     """
     g = DiGraph()  # creates an empty directed graph
-    # for n in range(4):
-    #     g.add_node(n,(1,2,0))
-    # g.add_edge(0, 1, 1)
-    # g.add_edge(1, 0, 1.1)
-    # g.add_edge(1, 2, 1.3)
-    # g.add_edge(2, 3, 1.1)
-    # g.add_edge(1, 3, 1.9)
-    # g.remove_edge(1, 3)
-    # g.add_edge(1, 3, 10)
+    for n in range(4):
+        g.add_node(n)
+    g.add_edge(0, 1, 1)
+    g.add_edge(1, 0, 1.1)
+    g.add_edge(1, 2, 1.3)
+    g.add_edge(2, 3, 1.1)
+    g.add_edge(1, 3, 1.9)
+    g.remove_edge(1, 3)
+    g.add_edge(1, 3, 10)
     # print(g)  # prints the __repr__ (func output)
     # print(g.get_all_v())  # prints a dict with all the graph's vertices.
     # print(g.all_in_edges_of_node(1))
@@ -46,7 +46,7 @@ def check0():
     # print(g_algo.shortest_path(0, 3))
     # g_algo.plot_graph()
     # g_algo.save_to_json("ariel.json")
-    g_algo.load_from_json("ariel.json")
+    # g_algo.load_from_json('../data/A0.json')
     print(g_algo)
 
 def check1():

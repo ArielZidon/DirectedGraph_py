@@ -24,7 +24,8 @@ class GraphAlgo(GraphAlgoInterface):
 
             for n in dict["Nodes"]:
                 if "pos" in n:
-                    graph_res.add_node(n["id"], pos=(n["pos"][0], n["pos"][1], n["pos"][2]))
+                    data = n["pos"].split(',')
+                    graph_res.add_node(n["id"],(data[0],data[1],data[2]))
                 else:
                     graph_res.add_node(n["id"])
 
@@ -36,7 +37,6 @@ class GraphAlgo(GraphAlgoInterface):
             return False
         self.graph = graph_res
         return True
-
 
 
     def save_to_json(self, file_name: str) -> bool:
