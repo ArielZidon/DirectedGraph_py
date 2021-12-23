@@ -11,7 +11,7 @@ class DiGraph(GraphInterface):
         return len(self.nodes)
 
     def e_size(self) -> int:
-        return len(self.nodes)
+        return len(self.edges)
 
     def get_all_v(self) -> dict:
         return self.nodes
