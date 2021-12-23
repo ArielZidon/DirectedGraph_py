@@ -1,15 +1,14 @@
 from typing import List
-
 from Node import Node
 from GraphAlgoInterface import GraphAlgoInterface
 from DiGraph import DiGraph
 from src import GraphInterface
+import matplotlib.pyplot as plt
+import numpy as np
 import json
 import copy
 
-
 class GraphAlgo(GraphAlgoInterface):
-
     def __init__(self,graph=DiGraph()) -> None:
         self.graph = graph
         self.dijkstra = dijkstra(graph)
@@ -42,6 +41,7 @@ class GraphAlgo(GraphAlgoInterface):
         return True
 
 
+
     def save_to_json(self, file_name: str) -> bool:
         graph_dict = {"Edges": [], "Nodes": []}
         for e in self.graph.edges:
@@ -62,7 +62,7 @@ class GraphAlgo(GraphAlgoInterface):
             return False
         return True
 
-########################################################################################################################
+
     def shortest_path(self, id1: int, id2: int) -> (float, list):
         self.getdijk(id1)
         self.dijkstra.addPath(id2)
@@ -77,7 +77,7 @@ class GraphAlgo(GraphAlgoInterface):
             for i in node_lst:
                 self.getdijk(i)
                 path = []
-                new = self.check_greedy(i,copy.deepcopy(node_lst), path)
+                new = self.checking_r(i,copy.deepcopy(node_lst), path)
                 if new < chosen:
                     chosen,road = new,path
                 else:
@@ -87,31 +87,26 @@ class GraphAlgo(GraphAlgoInterface):
             return ([],self.inf)
 
 
-    def check_greedy(self, i: int, c: list, ins: list):
-        ins.append(i)
-        c.remove(i)
-        index = None
-        sum = 0
-        while len(c):
-            low = float('inf')
-            for j in c:
+    def checking_r(self, a: int, b: list, c: list):
+        c.append(a)
+        b.remove(a)
+        count = 0
+        while len(b):
+            low = self.inf
+            for j in b:
                 if self.dijkstra.D[j]< low:
-                    low = self.dijkstra.D[j]
-                    index = j
-
-            sum += low
-            f = True
-            path = self.shortest_path(i,index)[1]
+                    low,ind = self.dijkstra.D[j],j
+            count += low
+            path,f = self.shortest_path(a, ind)[1],True
             for j in path:
-                if f:
-                    f = False
-                    continue
+                if not f:
+                    c.append(j)
                 else:
-                    ins.append(j)
-            i = index
-            self.getdijk(i)
-            c.remove(index)
-        return sum
+                    f = False
+            a = ind
+            self.getdijk(a)
+            b.remove(ind)
+        return count
 
 
 
@@ -128,10 +123,6 @@ class GraphAlgo(GraphAlgoInterface):
             return (0,self.inf)
 
 
-    def plot_graph(self) -> None:
-        pass
-
-
     def __repr__(self) -> str:
         return f'{self.graph}'
 
@@ -144,6 +135,19 @@ class GraphAlgo(GraphAlgoInterface):
             self.dijkstra.MC = self.graph.mc
             self.dijkstra.goForIt()
             return True
+
+    def plot_graph(self) -> None:
+        for node in self.graph.nodes.values():
+            x = float(node.pos[0])
+            y = float(node.pos[1])
+            id = int(node.key)
+            plt.plot(x, y, markersize=10, marker="o", color="pink")
+            for edge in self.graph.all_out_edges_of_node(id):
+                his_x = float(self.graph.nodes[edge].pos[0])
+                his_y = float(self.graph.nodes[edge].pos[1])
+                plt.annotate("", xy=(x, y), xytext=(his_x, his_y), arrowprops=dict(arrowstyle="<-"))
+        plt.show()
+
 
 
 class dijkstra:
@@ -159,38 +163,6 @@ class dijkstra:
         self.paps = {}
         self.D = {}
 
-    def initshate(self,fathers: dict, listPerNode: list) -> None:
-        for node in self.graph.nodes.keys():
-            if node != self.src:
-                self.D[node] = self.inf
-                fathers[node] = self.inf
-                listPerNode.append(node)
-                self.roads[node] = []
-        fathers[self.src] = self.src
-        self.D[self.src] = 0.0
-        self.roads[self.src] = []
-        listPerNode.append(self.src)
-
-    def theSmallest(self, Q: list) -> int:
-        min2 = self.inf
-        ans = -self.inf
-        for node in Q:
-            if min2 > self.D[node]:
-                ans = node
-                min2 = self.D[node]
-        if ans != -self.inf:
-            Q.remove(ans)
-        return ans
-
-    def updating(self, src: int, dest: int) -> None:
-        updatedDistance = self.D[src] + self.graph.edges[(src, dest)]
-        if updatedDistance >= self.D[dest]:
-            return
-        else:
-            self.D[dest] = updatedDistance
-            self.paps[dest] = src
-
-
     def goForIt(self):
         var = []
         self.initshate(self.paps, var)
@@ -202,7 +174,29 @@ class dijkstra:
                 self.updating(small,i)
 
 
-    def addPath(self, next: int) -> None:
+    def updating(self, s: int, d: int):
+        updatedDistance = self.D[s] + self.graph.edges[(s, d)]
+        if updatedDistance >= self.D[d]:
+            return
+        else:
+            self.D[d] = updatedDistance
+            self.paps[d] = s
+
+
+    def initshate(self,fathers: dict, listPerNode: list):
+        for i in self.graph.nodes.keys():
+            if i != self.src:
+                self.D[i] = self.inf
+                fathers[i] = self.inf
+                listPerNode.append(i)
+                self.roads[i] = []
+        fathers[self.src] = self.src
+        self.D[self.src] = 0.0
+        self.roads[self.src] = []
+        listPerNode.append(self.src)
+
+
+    def addPath(self, next: int):
         if len(self.roads[next]) != 0:
             return
         self.roads[next] = []
@@ -217,6 +211,17 @@ class dijkstra:
         self.roads[next].extend(self.roads[dad])
         self.roads[next].append(next)
 
+
+    def theSmallest(self, p: list) -> int:
+        M = self.inf
+        ans = -self.inf
+        for i in p:
+            if M > self.D[i]:
+                ans = i
+                M = self.D[i]
+        if ans != -self.inf:
+            p.remove(ans)
+        return ans
 
 
 
