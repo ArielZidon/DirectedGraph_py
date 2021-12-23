@@ -120,4 +120,4 @@ def check4():
 
 
 if __name__ == '__main__':
-    check2()
+    check4()

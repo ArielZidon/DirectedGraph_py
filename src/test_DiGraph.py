@@ -1,7 +1,7 @@
 from unittest import TestCase
 from DiGraph import DiGraph
 
-class TestDiGraph(TestCase):
+class testDiGraph(TestCase):
 
     def test_v_size(self):
         g = DiGraph()
