@@ -110,14 +110,6 @@ def check3():
     print(g_algo.TSP([1, 2, 4]))
     g_algo.plot_graph()
 
-def check4():
-    g = DiGraph()
-    g_algo = GraphAlgo(g)
-    g_algo.load_from_json('../data/A4.json')
-    print(g_algo.shortest_path(1,9))
-    print(g_algo.centerPoint())
-    print(g_algo.TSP([1,2,3,4,5]))
-
 
 if __name__ == '__main__':
     check4()
