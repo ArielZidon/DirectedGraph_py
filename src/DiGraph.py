@@ -1,3 +1,5 @@
+import random
+
 from GraphInterface import GraphInterface
 from Node import Node
 
@@ -37,8 +39,13 @@ class DiGraph(GraphInterface):
     def add_node(self, node_id: int, pos: tuple = None) -> bool:
         if node_id in self.nodes:
             return False
-        self.nodes[node_id] = Node(node_id, pos)
-        self.mc += 1
+        if pos!=None:
+            self.nodes[node_id] = Node(node_id, pos)
+            self.mc += 1
+        else:
+            self.nodes[node_id] = Node(node_id,(random.uniform(35.19,35.21),random.uniform(32.1031462,32.10314621),0.0))
+            self.mc += 1
+
         return True
 
     def remove_node(self, node_id: int) -> bool:
