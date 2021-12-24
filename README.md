@@ -1,4 +1,5 @@
 #  DirectedWeightedGraph
+![graph](https://user-images.githubusercontent.com/93768578/147350320-173cb108-05a2-482e-9b2c-aa4e6bdebbc4.png)
 
 
 In this project we will deal with directed graphs and all kinds of algorithms that can be run on them.
