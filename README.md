@@ -48,7 +48,11 @@ We will now explain each of the existing functions in the class:
 *tsp* - will find the best way to do circle on group of nodes in the graph.
 
 #  Matplotlib
-//////////
+The class receives the graph after the creation of all nodes and edges and the class creates a graphical interface on the screen:
+
+*plot_graph* - (The function is inside the *GraphAlgo* class) The function takes the lists of the graph that show the position of the nodes and the eges that connect the nodes and draw it on the screen:
+
+![graph](https://user-images.githubusercontent.com/93768578/147351645-8f2a5ebe-fa34-4a6f-b95d-792241c137db.png)
 
 
 #  How to run the project
