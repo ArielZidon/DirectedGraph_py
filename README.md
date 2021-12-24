@@ -27,7 +27,11 @@ The graph is created by edgs and nodes as you can see in the slide and you can a
 
 #  classes
 
-//////////////
+*DiGraph* - The class contains lists of nodes and edges and in addition is responsible for their creation and the structure of the graph.
+
+*GraphAlgo* - his class get DiGraph and can calculate the next list of algorithms: If the graph is connected. A shorted path between 2 nodes. The ideal center of the graph. Tsp problem for a group of verticals in the graph
+
+*Node* - The class contains פarameters of nodes and lists of edges that go out and enter the nodes.
 
 #  DirectedWeightedGraphAlgorithm
 The algorithm class is a class where certain algorithms can be run on the graph.
