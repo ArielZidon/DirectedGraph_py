@@ -52,7 +52,7 @@ The class receives the graph after the creation of all nodes and edges and the c
 
 *plot_graph* - (The function is inside the *GraphAlgo* class) The function takes the lists of the graph that show the position of the nodes and the eges that connect the nodes and draw it on the screen:
 
-![graph](https://user-images.githubusercontent.com/93768578/147351645-8f2a5ebe-fa34-4a6f-b95d-792241c137db.png)
+![A5](https://user-images.githubusercontent.com/93768578/147351688-25297c77-2c38-4c99-874c-fcc4c30d5a03.png)
 
 
 #  How to run the project
