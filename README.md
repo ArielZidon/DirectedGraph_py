@@ -27,6 +27,9 @@ The graph is created by edgs and nodes as you can see in the slide and you can a
 
 #  classes
 
+![image](https://user-images.githubusercontent.com/93542763/147397478-8d845390-656e-47bc-8709-d4940c5337e4.png)
+
+
 *DiGraph* - The class contains lists of nodes and edges and in addition is responsible for their creation and the structure of the graph.
 
 *GraphAlgo* - his class get DiGraph and can calculate the next list of algorithms: If the graph is connected. A shorted path between 2 nodes. The ideal center of the graph. Tsp problem for a group of verticals in the graph
