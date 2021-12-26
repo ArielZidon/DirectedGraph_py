@@ -44,7 +44,7 @@ def check0():
     print(g.all_out_edges_of_node(1))
     g_algo = GraphAlgo(g)
     # print(g_algo.shortest_path(0, 3))
-    g_algo.load_from_json('../data/A4.json')
+    g_algo.load_from_json('../data/A0.json')
     print(g_algo)
     g_algo.plot_graph()
 
@@ -109,4 +109,4 @@ def check3():
 
 
 if __name__ == '__main__':
-    check3()
+    check2()

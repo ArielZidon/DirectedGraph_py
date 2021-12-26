@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Node{
+int key
+tuple pos
+dictionary out
+dictionary In
+}
+
+class DiGraph{
+dictionary <Integer, Node> nodes
+dictionary <edges from, edges to, w> edges
+int mc
+
+int v_size()
+int e_size()
+dictionary get_all_v()
+dictionary all_in_edges_of_node()
+dictionary all_out_edges_of_node()
+int get_mc()
+boolean add_edge()
+boolean add_node()
+boolean remove_node()
+boolean remove_edge()
+}
+
+class GraphAlgo{
++DiGraph graph
+
+List shortest_path()
+node centerPoint()
+class dijkstra()
+List TSP()
++boolean load_from_json()
++boolean save_to_json()
+}
+
+DiGraph ---> Node
+DiGraph ---> GraphAlgo
+main ---|> DiGraph
+main ---|> GraphAlgo
+
+
+@enduml
