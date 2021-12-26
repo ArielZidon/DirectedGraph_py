@@ -56,4 +56,19 @@ The class receives the graph after the creation of all nodes and edges and the c
 
 
 #  How to run the project
-/////
+First, download the program to your computer.
+
+The program can be run in 2 ways:
+
+ 1.Build a graph yourself or use one of the existing tests in main: 
+ 
+ ![image](https://user-images.githubusercontent.com/93542763/147396985-47afde58-d9c2-4607-9fd6-49d561bbd1c0.png)
+ 
+ ![image](https://user-images.githubusercontent.com/93542763/147396990-4c6d943e-a987-4c06-a867-f8eda9951e94.png)
+ 
+ 2.Upload a Jasn file and run the algorithms you want on it
+ 
+ ![image](https://user-images.githubusercontent.com/93542763/147397052-fdeae08f-8b05-4560-b693-2f7097c934b4.png)
+
+
+
