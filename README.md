@@ -47,6 +47,10 @@ We will now explain each of the existing functions in the class:
 
 *tsp* - will find the best way to do circle on group of nodes in the graph.
 
+*load* - Loading graph from existing Json file
+
+*save* - Creates a Json file with the graph we created
+
 #  Matplotlib
 The class receives the graph after the creation of all nodes and edges and the class creates a graphical interface on the screen:
 
