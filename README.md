@@ -61,7 +61,9 @@ The class receives the graph after the creation of all nodes and edges and the c
 
 ![A5](https://user-images.githubusercontent.com/93768578/147351688-25297c77-2c38-4c99-874c-fcc4c30d5a03.png)
 
-
+# The results of the algorithms
+You can see the results of the algorithm times and the comparison of the run times between java and python at the following link:
+https://github.com/ArielZidon/DirectedGraph_py.wiki.git
 #  How to run the project
 First, download the program to your computer.
 
